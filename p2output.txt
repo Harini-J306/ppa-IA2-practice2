@@ -1,6 +1,5 @@
-GNU bash, version 4.4.20(1)-release (x86_64-pc-linux-gnu)
-gcc -g p2original.c
- gdb a.out
+~/ppa-IA2-practice2-2$ gcc -g p2original.c
+~/ppa-IA2-practice2-2$ gdb a.out
 GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
 Copyright (C) 2018 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -17,78 +16,83 @@ For help, type "help".
 Type "apropos word" to search for commands related to "word"...
 Reading symbols from a.out...done.
 (gdb) b main
-Breakpoint 1 at 0x835: file p2original.c, line 28.
+Breakpoint 1 at 0x850: file p2original.c, line 34.
 (gdb) r
 Starting program: /home/runner/ppa-IA2-practice2-2/a.out 
 warning: Error disabling address space randomization: Operation not permitted
 
-Breakpoint 1, main () at p2original.c:28
-28    printf("enter 3 numbers\n");
-(gdb) n
-enter 3 numbers
-29    a=input_side();
+Breakpoint 1, main () at p2original.c:34
+34    int AB = input_side();
 (gdb) s
-input_side () at p2original.c:3
-3   {
+input_side () at p2original.c:4
+4   {
 (gdb) n
-5     scanf("%d", &i);
+6     printf("Enter a side of the triangle:\n");
+(gdb) n
+Enter a side of the triangle:
+7     scanf("%d", &side);
 (gdb) n
 5
-6     return i;
+8     return side;
 (gdb) n
-7   }
+9   }
 (gdb) n
-main () at p2original.c:30
-30    b=input_side();
+main () at p2original.c:35
+35    int BC = input_side();
 (gdb) s
-input_side () at p2original.c:3
-3   {
+input_side () at p2original.c:4
+4   {
 (gdb) n
-5     scanf("%d", &i);
+6     printf("Enter a side of the triangle:\n");
 (gdb) n
-8
-6     return i;
+Enter a side of the triangle:
+7     scanf("%d", &side);
 (gdb) n
-7   }
+6
+8     return side;
 (gdb) n
-main () at p2original.c:31
-31    c=input_side();
+9   }
+(gdb) n
+main () at p2original.c:36
+36    int CA = input_side();
 (gdb) s
-input_side () at p2original.c:3
-3   {
+input_side () at p2original.c:4
+4   {
 (gdb) n
-5     scanf("%d", &i);
+6     printf("Enter a side of the triangle:\n");
+(gdb) n
+Enter a side of the triangle:
+7     scanf("%d", &side);
 (gdb) n
 7
-6     return i;
+8     return side;
 (gdb) n
-7   }
+9   }
 (gdb) n
-main () at p2original.c:32
-32    isscalene=check_scalene(a,b,c);
+main () at p2original.c:37
+37    int res = check_scalene(AB, BC, CA);
 (gdb) s
-check_scalene (a=5, b=8, c=7) at p2original.c:10
-10    if(a==b&&a==c)
+check_scalene (a=5, b=6, c=7) at p2original.c:13
+13    if (a != b && a != c && b != c)
 (gdb) n
-13    if(b==c)
+15      return 1;
 (gdb) n
-16    return 1;
+18  }
 (gdb) n
-17  }
-(gdb) n
-main () at p2original.c:33
-33    output(a,b,c,isscalene);
+main () at p2original.c:38
+38    output(AB, BC, CA, res);
 (gdb) s
-output (a=5, b=8, c=7, isscalene=1) at p2original.c:20
-20    if(isscalene==1)
+output (a=5, b=6, c=7, isScalene=1) at p2original.c:22
+22    if(isScalene)
 (gdb) n
-21    printf("the triangle is scalene");
+24      printf("The triangle with sides %d, %d and %d is scalene\n", a, b, c);
 (gdb) n
-24  }
+The triangle with sides 5, 6 and 7 is scalene
+30  }
 (gdb) n
-main () at p2original.c:34
-34    return 0;
+main () at p2original.c:39
+39    return 0;
 (gdb) n
-35  }(gdb) c
+40  }(gdb) c
 Continuing.
-the triangle is scalene[Inferior 1 (process 245) exited normally]
+[Inferior 1 (process 1072) exited normally]
